@@ -1,6 +1,8 @@
  import BotaoConclui  from "./componentes/concluirTarefa.js"
  import BotaoDeleta from "./componentes/deletarTarefa.js"
 
+ let tarefas = []
+
 const handleNovoItem = (evento) => {
     evento.preventDefault()
 
@@ -11,7 +13,7 @@ const handleNovoItem = (evento) => {
 
     const calendario = document.querySelector('[data-form-date]')
     const data = moment(calendario.value)
-    const dataFormatada = data.format('DD/MM/YYYY')
+    const dataFormatada = data.format('DD/MM/YYYY') 
     
     const dados = {
         valor,
@@ -20,7 +22,12 @@ const handleNovoItem = (evento) => {
 
     const criaTarefa = criarTarefa(dados)
 
+    tarefas.push(dados)
+
     lista.appendChild(criaTarefa)
+
+    localStorage.setItem("tarefas", JASON.stringify(tarefas))
+
     input.value = " "
 }
 
